@@ -11,8 +11,8 @@ class YZRotationUpdater extends RotationUpdater {
 
   YZRotationUpdater() {
     isRandom = random.nextBool();
-    angleY = 10.0 + random.nextInt(350);
-    angleZ = 10.0 + random.nextInt(350);
+    angleY = (30.0 + random.nextInt(150));
+    angleZ = (30.0 + random.nextInt(150));
     angleDirY = random.sign();
     angleDirZ = random.sign();
   }

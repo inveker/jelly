@@ -11,8 +11,8 @@ class XZRotationUpdater extends RotationUpdater {
 
   XZRotationUpdater() {
     isRandom = random.nextBool();
-    angleX = 10.0 + random.nextInt(350);
-    angleZ = 10.0 + random.nextInt(350);
+    angleX = (30.0 + random.nextInt(150));
+    angleZ = (30.0 + random.nextInt(150));
     angleDirX = random.sign();
     angleDirZ = random.sign();
   }

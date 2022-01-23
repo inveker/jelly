@@ -124,4 +124,10 @@ var allPalettes = [
   lemonade,
   goldHorizon,
   redWater,
+  // [
+  //   Colors.white,
+  //   Colors.black,
+  //   Colors.purpleAccent[700]!,
+  //   Colors.pink[400]!
+  // ]
 ];

@@ -47,6 +47,10 @@ Color randomColor() {
 }
 
 
+Color randomRealColor() {
+  return Color.fromARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+}
+
 
 double convertRadiusToSigma(double radius) {
   return radius * 0.57735 + 0.5;

@@ -2,28 +2,35 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:nft_creator/main.dart';
+final frameRate = 50;
+final frameTime = 1000 / frameRate;
+final allTime = 5;
 
+final countHotFrames = 22 * frameRate;
+
+final allFrames = (allTime * frameRate) + countHotFrames;
 Future<void> recorderApp(Scene scene) async {
   print('RecordedApp ${scene.name}');
 
   var time = DateTime.now().millisecondsSinceEpoch;
+ //fix
+ //  try {
+ //    await Directory('C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/${scene.name}').delete(recursive: true);
+ //  } catch(e) {}
+ //  Directory('C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/').createSync();
 
-  try {
-    await Directory('C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/${scene.name}').delete(recursive: true);
-  } catch(e) {}
-  Directory('C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/').createSync();
-  Directory('C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/${scene.name}').createSync();
+  var dirPath = 'C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/${scene.name}';
+  var q = 1;
+  while(Directory(dirPath).existsSync()) {
+    dirPath = 'C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/${q}_${scene.name}';
+    q++;
+  }
+  Directory(dirPath).createSync();
 
-  final double imageWidth = 720;
-  final double imageHeight = 720;
+  final double imageWidth = pictureSize.width;
+  final double imageHeight = pictureSize.height;
 
-  final frameRate = 50;
-  final frameTime = 1000 / frameRate;
-  final allTime = 5;
 
-  final countHotFrames = 360;
-
-  final allFrames = (allTime * frameRate) + countHotFrames;
 
 
 
@@ -38,17 +45,15 @@ Future<void> recorderApp(Scene scene) async {
         final picture = recorder.endRecording();
         final img = await picture.toImage(imageWidth.toInt(), imageHeight.toInt());
         var pngBytes = await img.toByteData(format: ImageByteFormat.png );
-        var q = 0;
-        File file = File('C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/${scene.name}/img${i}.png');
-        while(file.existsSync()) {
-          file = File('C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/${q}_${scene.name}/img${i}.png');
-          q++;
-        }
+
+        File file = File('$dirPath/img${i}.png');
+
         file
           ..writeAsBytes(pngBytes!.buffer.asInt8List(pngBytes.offsetInBytes, pngBytes.lengthInBytes))
           ..createSync();
+        print('${(i - countHotFrames) / (allFrames - countHotFrames ) * 100}%');
+
       }
-      print('${(i - countHotFrames) / (allFrames - countHotFrames ) * 100}%');
 
     });
   }

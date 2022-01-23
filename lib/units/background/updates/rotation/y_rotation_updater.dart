@@ -9,7 +9,7 @@ class YRotationUpdater extends RotationUpdater {
 
   YRotationUpdater() {
     isRandom = random.nextBool();
-    angleY = 10.0 + random.nextInt(350);
+    angleY = (30.0 + random.nextInt(150));
     angleDirY = random.sign();
   }
 

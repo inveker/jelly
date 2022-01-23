@@ -1,3 +1,4 @@
+import 'package:nft_creator/main.dart';
 import 'package:nft_creator/units/background/backgound_unit.dart';
 import 'package:nft_creator/units/background/generates/generator.dart';
 import 'package:nft_creator/utils/utils.dart';
@@ -9,13 +10,13 @@ class RandomPointsGenerator extends Generator {
   double angleZ = random.nextInt(360).toDouble();
 
 
+  int particleCount = 1 + random.nextInt(5);
   late List<Vector2> points;
 
   RandomPointsGenerator() {
-    int count = 2 + random.nextInt(3);
     points = [];
-    for(var i = 0; i < count; i ++) {
-      points.add(Vector2(random.nextInt(720).toDouble(), random.nextInt(720).toDouble()));
+    for(var i = 0; i < particleCount; i ++) {
+      points.add(Vector2(random.nextInt(pictureSize.width.toInt()).toDouble(), random.nextInt(pictureSize.width.toInt()).toDouble()));
     }
   }
 
@@ -24,7 +25,7 @@ class RandomPointsGenerator extends Generator {
     final centerX = context.size!.width / 2;
     final centerY = context.size!.height / 2;
 
-    var radius = (720) / 2;
+    var radius = (pictureSize.width) / 2;
 
     var v = Vector2(1, 0).rotate(radians(angleZ)) * length;
 

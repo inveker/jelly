@@ -9,7 +9,7 @@ class ZRotationUpdater extends RotationUpdater {
 
   ZRotationUpdater() {
     isRandom = random.nextBool();
-    angleZ = 10.0 + random.nextInt(350);
+    angleZ = (30.0 + random.nextInt(150));
     angleDirZ = random.sign();
   }
 

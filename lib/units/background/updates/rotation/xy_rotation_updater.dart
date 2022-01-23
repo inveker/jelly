@@ -11,8 +11,8 @@ class XYRotationUpdater extends RotationUpdater {
 
   XYRotationUpdater() {
     isRandom = random.nextBool();
-    angleX = 10.0 + random.nextInt(350);
-    angleY = 10.0 + random.nextInt(350);
+    angleX = (30.0 + random.nextInt(150));
+    angleY = (30.0 + random.nextInt(150));
     angleDirX = random.sign();
     angleDirY = random.sign();
   }
