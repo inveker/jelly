@@ -3,13 +3,18 @@ import 'package:nft_creator/units/background/updates/rotation/rotation_updater.d
 import 'package:nft_creator/utils/utils.dart';
 
 class XZRotationUpdater extends RotationUpdater {
-  bool isRandom = false;
-  double angleX = 0;
-  int angleDirX = 1;
-  double angleZ = 0;
-  int angleDirZ = 1;
+  bool? isRandom;
+  double? angleX;
+  int? angleDirX;
+  double? angleZ;
+  int? angleDirZ;
+  XZRotationUpdater.fromJson(Map json) : super.fromJson(json);
 
   XZRotationUpdater() {
+    init();
+  }
+
+  init() {
     isRandom = random.nextBool();
     angleX = (30.0 + random.nextInt(150));
     angleZ = (30.0 + random.nextInt(150));
@@ -19,12 +24,12 @@ class XZRotationUpdater extends RotationUpdater {
 
   void update(BackgroundUnit context, double dt) {
     context.particles.toList().forEach((p) {
-      if(isRandom) {
-        p.rotationX += random.nextInt(angleX.toInt()) * angleDirX * dt;
-        p.rotationZ += random.nextInt(angleZ.toInt()) * angleDirZ * dt;
+      if(isRandom!) {
+        p.rotationX += random.nextInt(angleX!.toInt()) * angleDirX! * dt;
+        p.rotationZ += random.nextInt(angleZ!.toInt()) * angleDirZ! * dt;
       } else {
-        p.rotationX += angleX * angleDirX * dt;
-        p.rotationZ += angleZ * angleDirZ * dt;
+        p.rotationX += angleX! * angleDirX! * dt;
+        p.rotationZ += angleZ! * angleDirZ! * dt;
       }
     });
   }

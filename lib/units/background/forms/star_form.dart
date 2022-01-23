@@ -8,13 +8,19 @@ import 'package:nft_creator/utils/vector2.dart';
 
 
 class StarForm extends FormPaint {
+  StarForm.fromJson(Map json) : super.fromJson(json);
 
 
-  double selfRotationZ = 0;
-  bool randomSelfRotation = random.nextBool();
+  double? selfRotationZ = 0;
+  bool? randomSelfRotation = random.nextBool();
   var selfRotations = {};
 
   StarForm() {
+    init();
+  }
+
+  @override
+  void init() {
     selfRotationZ = random.nextInt(360).toDouble();
   }
 
@@ -25,7 +31,7 @@ class StarForm extends FormPaint {
   void paint(BackgroundUnit context, Canvas canvas, Size size) {
     for (final p in context.particles) {
       var _selfRotation = selfRotationZ;
-      if(randomSelfRotation) {
+      if(randomSelfRotation!) {
         if(selfRotations[p] == null) {
           selfRotations[p] = random.nextInt(360).toDouble();
         }
@@ -34,7 +40,7 @@ class StarForm extends FormPaint {
       canvas.save();
       canvas.translate(p.position.x, p.position.y);
 
-      canvas.transform((Matrix4.rotationX(radians(p.rotationX))..rotateY(radians(p.rotationY))..rotateZ(radians(p.rotationZ + _selfRotation))).storage);
+      canvas.transform((Matrix4.rotationX(radians(p.rotationX))..rotateY(radians(p.rotationY))..rotateZ(radians(p.rotationZ + _selfRotation!))).storage);
 
 
       if (p.type == BackgroundParticleType.simple) {

@@ -3,7 +3,19 @@ import 'package:nft_creator/units/background/updates/rotation/rotation_updater.d
 import 'package:nft_creator/utils/utils.dart';
 
 class NotRotationUpdater extends RotationUpdater {
+
+  NotRotationUpdater.fromJson(Map json) : super.fromJson(json);
+  NotRotationUpdater() {
+    init();
+  }
+
+  @override
+  void init() {
+    // TODO: implement init
+  }
+
   void update(BackgroundUnit context, double dt) {
 
   }
+
 }

@@ -1,0 +1,168 @@
+[
+  {
+    "form": {
+      "runtype": "TriangleForm",
+      "selfRotationZ": 73.0,
+      "randomSelfRotation": true
+    },
+    "palette": [
+      [
+        255,
+        108,
+        50,
+        172
+      ],
+      [
+        255,
+        191,
+        14,
+        246
+      ],
+      [
+        255,
+        68,
+        30,
+        36
+      ],
+      [
+        255,
+        78,
+        15,
+        54
+      ],
+      [
+        255,
+        18,
+        214,
+        208
+      ]
+    ],
+    "generator": {
+      "runtype": "RandomPointsGenerator",
+      "particleCount": 5,
+      "position": null,
+      "velocity": null,
+      "ang": null,
+      "speed": null,
+      "angleDir": null,
+      "length": 281.0,
+      "angleZ": 106.0,
+      "points": [
+        {
+          "x": 71.0,
+          "y": 583.0
+        },
+        {
+          "x": 223.0,
+          "y": 599.0
+        },
+        {
+          "x": 71.0,
+          "y": 196.0
+        },
+        {
+          "x": 305.0,
+          "y": 454.0
+        },
+        {
+          "x": 198.0,
+          "y": 218.0
+        }
+      ]
+    },
+    "movedUpdater": {
+      "runtype": "NotMovedUpdater",
+      "speed": null,
+      "tails": null,
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "XYRotationUpdater",
+      "isRandom": false,
+      "angleX": 53.0,
+      "angleDirX": -1,
+      "angleY": 178.0,
+      "angleDirY": -1,
+      "angleZ": null,
+      "angleDirZ": null
+    },
+    "reversed": null,
+    "startFrame": 150
+  },
+  {
+    "form": {
+      "runtype": "CircleForm",
+      "selfRotationZ": null,
+      "randomSelfRotation": null
+    },
+    "palette": [
+      [
+        255,
+        206,
+        80,
+        98
+      ],
+      [
+        255,
+        80,
+        45,
+        188
+      ],
+      [
+        255,
+        76,
+        223,
+        192
+      ]
+    ],
+    "generator": {
+      "runtype": "CenterMovedRotationGenerator",
+      "particleCount": 3,
+      "position": {
+        "x": 522.4661405178373,
+        "y": 151.2352025313269
+      },
+      "velocity": {
+        "x": 0.6570530046495582,
+        "y": 0.7538443798828689
+      },
+      "ang": 160.0,
+      "speed": 1561.0,
+      "angleDir": -1,
+      "length": null,
+      "angleZ": null,
+      "points": null
+    },
+    "movedUpdater": {
+      "runtype": "RandomNotMovedLinearUpdater",
+      "speed": null,
+      "tails": [
+        {
+          "x": -1.7013051989950603,
+          "y": -2.4709432652071115
+        },
+        {
+          "x": -1.6759961694149714,
+          "y": -1.091346342874865
+        },
+        {
+          "x": 1.0541901274481145,
+          "y": 1.6996126544571641
+        }
+      ],
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "XYRotationUpdater",
+      "isRandom": true,
+      "angleX": 107.0,
+      "angleDirX": -1,
+      "angleY": 159.0,
+      "angleDirY": 1,
+      "angleZ": null,
+      "angleDirZ": null
+    },
+    "reversed": null,
+    "startFrame": 0
+  }
+]

@@ -55,3 +55,10 @@ Color randomRealColor() {
 double convertRadiusToSigma(double radius) {
   return radius * 0.57735 + 0.5;
 }
+
+List<Color> randomPalette() {
+  return [
+    for (var i = 0; i < random.nextInt(4) + 2; i++)
+      randomRealColor(),
+  ];
+}

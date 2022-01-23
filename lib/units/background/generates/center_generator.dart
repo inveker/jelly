@@ -5,8 +5,18 @@ import 'package:nft_creator/utils/utils.dart';
 import 'package:nft_creator/utils/vector2.dart';
 
 class CenterGenerator extends Generator {
-  int particleCount = 1 + random.nextInt(5);
+  int? particleCount;
 
+  CenterGenerator.fromJson(Map json) : super.fromJson(json);
+
+  CenterGenerator() {
+    init();
+  }
+
+  @override
+  void init() {
+    particleCount = 1 + random.nextInt(5);
+  }
 
   @override
   void update(BackgroundUnit context, double dt) {
@@ -15,7 +25,7 @@ class CenterGenerator extends Generator {
 
 
 
-    for(var i = 0; i < particleCount; i++) {
+    for(var i = 0; i < particleCount!; i++) {
       var position = Vector2(centerX, centerY);
 
       context.particles.add(

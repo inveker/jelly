@@ -5,11 +5,17 @@ import 'package:nft_creator/utils/utils.dart';
 import 'package:nft_creator/utils/vector2.dart';
 
 class HeartForm extends FormPaint {
-  double selfRotationZ = 0; //angle < 180
-  bool randomSelfRotation = random.nextBool();
+  HeartForm.fromJson(Map json) : super.fromJson(json);
+  double? selfRotationZ = 0; //angle < 180
+  bool? randomSelfRotation = random.nextBool();
   var selfRotations = {};
 
   HeartForm() {
+    init();
+  }
+
+  @override
+  void init() {
     selfRotationZ = random.nextInt(60).toDouble() * random.sign();
   }
 
@@ -17,7 +23,7 @@ class HeartForm extends FormPaint {
   void paint(BackgroundUnit context, Canvas canvas, Size size) {
     for (final p in context.particles) {
       var _selfRotation = selfRotationZ;
-      if(randomSelfRotation) {
+      if(randomSelfRotation!) {
         if(selfRotations[p] == null) {
           selfRotations[p] = random.nextInt(360).toDouble();
         }
@@ -26,7 +32,7 @@ class HeartForm extends FormPaint {
       canvas.save();
       canvas.translate(p.position.x, p.position.y);
 
-      canvas.transform((Matrix4.rotationX(radians(p.rotationX))..rotateY(radians(p.rotationY))..rotateZ(radians(p.rotationZ + _selfRotation))).storage);
+      canvas.transform((Matrix4.rotationX(radians(p.rotationX))..rotateY(radians(p.rotationY))..rotateZ(radians(p.rotationZ + _selfRotation!))).storage);
 
       if (p.type == BackgroundParticleType.simple) {
         canvas.drawPath(heart(p.width), Paint()..color = p.color.withAlpha(150));
@@ -60,6 +66,5 @@ class HeartForm extends FormPaint {
       0, 0, 1, 0,
       0, 0, 0, 1,
     )).storage);
-    return pathHeart!.transform(Matrix4.translationValues(-width / 2, -width / 2, 0).storage).transform(Matrix4.rotationZ(radians(selfRotationZ)).storage);
   }
 }

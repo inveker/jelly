@@ -6,6 +6,17 @@ import 'package:nft_creator/utils/vector2.dart';
 
 
 class CircleForm extends FormPaint {
+  CircleForm.fromJson(Map json) : super.fromJson(json);
+
+  CircleForm() {
+    init();
+  }
+
+  @override
+  void init() {
+
+  }
+
   @override
   void paint(BackgroundUnit context, Canvas canvas, Size size) {
     for (final p in context.particles) {

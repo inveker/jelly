@@ -3,7 +3,17 @@ import 'package:nft_creator/units/background/updates/rotation/rotation_updater.d
 import 'package:nft_creator/utils/utils.dart';
 
 class AXYRotationUpdater extends RotationUpdater {
-  bool isRandom = false;
+  AXYRotationUpdater.fromJson(Map json) : super.fromJson(json);
+  AXYRotationUpdater() {
+    init();
+  }
+
+  @override
+  void init() {
+    isRandom = random.nextBool();
+  }
+
+  bool? isRandom;
   Map<BackgroundParticle, Map<String, num>> _particliesRotation = {};
 
   @override
@@ -20,7 +30,7 @@ class AXYRotationUpdater extends RotationUpdater {
           'dirY': random.sign(),
         };
       }
-      if(isRandom) {
+      if(isRandom!) {
         p.rotationX += random.nextInt(_particliesRotation[p]!['angleX']!.toInt()) * _particliesRotation[p]!['dirX']! * dt;
         p.rotationY += random.nextInt(_particliesRotation[p]!['angleY']!.toInt()) * _particliesRotation[p]!['dirY']! * dt;
       } else {

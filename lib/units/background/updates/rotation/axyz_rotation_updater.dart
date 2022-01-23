@@ -3,13 +3,21 @@ import 'package:nft_creator/units/background/updates/rotation/rotation_updater.d
 import 'package:nft_creator/utils/utils.dart';
 
 class AXYZRotationUpdater extends RotationUpdater {
-  bool isRandom = false;
+  AXYZRotationUpdater.fromJson(Map json) : super.fromJson(json);
+  AXYZRotationUpdater() {
+    init();
+  }
+
+  @override
+  void init() {
+    isRandom = random.nextBool();
+  }
+
+  bool? isRandom;
   Map<BackgroundParticle, Map<String, num>> _particliesRotation = {};
-  int maxWidth = random.nextInt(3);
 
   @override
   void update(BackgroundUnit context, double dt) {
-    // dt = dt / 5;
     context.particles.toList().forEach((p) {
       if(_particliesRotation[p] == null) {
         var x = (30 + random.nextInt(150));
@@ -25,7 +33,7 @@ class AXYZRotationUpdater extends RotationUpdater {
           'dirZ': random.sign(),
         };
       }
-      if(isRandom) {
+      if(isRandom!) {
         p.rotationX += random.nextInt(_particliesRotation[p]!['angleX']!.toInt()) * _particliesRotation[p]!['dirX']! * dt;
         p.rotationY += random.nextInt(_particliesRotation[p]!['angleY']!.toInt()) * _particliesRotation[p]!['dirY']! * dt;
         p.rotationZ += random.nextInt(_particliesRotation[p]!['angleZ']!.toInt()) * _particliesRotation[p]!['dirZ']! * dt;

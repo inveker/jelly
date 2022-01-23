@@ -5,14 +5,25 @@ import 'package:nft_creator/utils/vector2.dart';
 
 class RotationMovedUpdater extends MovedUpdater {
 
-  var speed = 100 + random.nextInt(100);
-  var angleZ = 30 + random.nextInt(150) * random.sign();
+  RotationMovedUpdater.fromJson(Map json) : super.fromJson(json);
+  RotationMovedUpdater() {
+    init();
+  }
+
+  @override
+  void init() {
+    speed = 100 + random.nextInt(100);
+    angleZ = 30 + random.nextInt(150) * random.sign();
+  }
+
+  num? speed;
+  num? angleZ;
 
   @override
   void update(BackgroundUnit context, double dt) {
     context.particles.forEach((p) {
-      p.velocity = p.velocity.rotate(radians(angleZ * dt));
-      p.speed += speed * dt;
+      p.velocity = p.velocity.rotate(radians(angleZ! * dt));
+      p.speed += speed! * dt;
     });
   }
 }

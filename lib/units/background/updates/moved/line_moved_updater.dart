@@ -5,12 +5,22 @@ import 'package:nft_creator/utils/vector2.dart';
 
 class LineMovedUpdater extends MovedUpdater {
 
-  var speed = 100 + random.nextInt(100);
+  LineMovedUpdater.fromJson(Map json) : super.fromJson(json);
+  LineMovedUpdater() {
+    init();
+  }
+
+  @override
+  void init() {
+    speed = 100 + random.nextInt(100);
+  }
+
+  num? speed;
 
   @override
   void update(BackgroundUnit context, double dt) {
     context.particles.forEach((p) {
-      p.speed += speed * dt;
+      p.speed += speed! * dt;
     });
   }
 }

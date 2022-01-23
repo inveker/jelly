@@ -7,7 +7,19 @@ import 'package:nft_creator/utils/vector2.dart';
 
 
 class CircleGenerator extends Generator {
-  int particleCount = 1 + random.nextInt(5);
+  CircleGenerator.fromJson(Map json) : super.fromJson(json);
+
+  CircleGenerator() {
+    init();
+  }
+
+  int? particleCount;
+
+  @override
+  void init() {
+    particleCount = 1 + random.nextInt(5);
+  }
+
   @override
   void update(BackgroundUnit context, double dt) {
     final centerX = context.size!.width / 2;
@@ -15,7 +27,7 @@ class CircleGenerator extends Generator {
 
     var radius = (pictureSize.width) / 2;
 
-    for(var i = 0; i < particleCount; i++) {
+    for(var i = 0; i < particleCount!; i++) {
       var position = Vector2.random() * radius + Vector2(centerX, centerY);
 
       context.particles.add(

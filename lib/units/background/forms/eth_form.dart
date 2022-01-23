@@ -5,11 +5,18 @@ import 'package:nft_creator/utils/utils.dart';
 import 'package:nft_creator/utils/vector2.dart';
 
 class EthForm extends FormPaint {
-  double selfRotationZ = 0; //angle < 180
-  bool randomSelfRotation = random.nextBool();
+  EthForm.fromJson(Map json) : super.fromJson(json);
+
+  double? selfRotationZ = 0; //angle < 180
+  bool? randomSelfRotation = random.nextBool();
   var selfRotations = {};
 
   EthForm() {
+    init();
+  }
+
+  @override
+  void init() {
     selfRotationZ = random.nextInt(60).toDouble() * random.sign();
   }
 
@@ -17,7 +24,7 @@ class EthForm extends FormPaint {
   void paint(BackgroundUnit context, Canvas canvas, Size size) {
     for (final p in context.particles) {
       var _selfRotation = selfRotationZ;
-      if(randomSelfRotation) {
+      if(randomSelfRotation!) {
         if(selfRotations[p] == null) {
           selfRotations[p] = random.nextInt(360).toDouble();
         }
@@ -26,7 +33,7 @@ class EthForm extends FormPaint {
       canvas.save();
       canvas.translate(p.position.x, p.position.y);
 
-      canvas.transform((Matrix4.rotationX(radians(p.rotationX))..rotateY(radians(p.rotationY))..rotateZ(radians(p.rotationZ + _selfRotation))).storage);
+      canvas.transform((Matrix4.rotationX(radians(p.rotationX))..rotateY(radians(p.rotationY))..rotateZ(radians(p.rotationZ + _selfRotation!))).storage);
 
       if (p.type == BackgroundParticleType.simple) {
 

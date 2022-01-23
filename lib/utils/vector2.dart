@@ -100,4 +100,13 @@ class Vector2 {
         y * a
     );
   }
+
+  Map toJson (){
+    return {
+      'x': x,
+      'y': y,
+    };
+  }
+
+  Vector2.fromJson(Map json): x = json['x'], y = json['y'];
 }

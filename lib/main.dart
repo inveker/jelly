@@ -15,10 +15,13 @@ import 'package:nft_creator/units/background/generates/center_moved_rotation_gen
 import 'package:nft_creator/units/background/generates/circle_multiply_generator.dart';
 import 'package:nft_creator/units/background/generates/circle_generator.dart';
 import 'package:nft_creator/units/background/generates/cross_generator.dart';
+import 'package:nft_creator/units/background/generates/generator.dart';
 import 'package:nft_creator/units/background/generates/random_points_generator.dart';
 import 'package:nft_creator/units/background/generates/random_points_multiply_generator.dart';
+import 'package:nft_creator/units/background/palette.dart';
 import 'package:nft_creator/units/background/updates/moved/chaotic_moved_updater.dart';
 import 'package:nft_creator/units/background/updates/moved/line_moved_updater.dart';
+import 'package:nft_creator/units/background/updates/moved/moved_updater.dart';
 import 'package:nft_creator/units/background/updates/moved/not_moved_updater.dart';
 import 'package:nft_creator/units/background/updates/moved/random_not_moved_linear_updater.dart';
 import 'package:nft_creator/units/background/updates/moved/random_not_moved_random_updater.dart';
@@ -42,53 +45,86 @@ import 'package:nft_creator/units/background/updates/rotation/z_rotation_updater
 import 'package:nft_creator/units/background/updates/updater.dart';
 import 'package:nft_creator/utils/utils.dart';
 import 'apps/recorder_app.dart';
+import 'apps/recorder_from_saved_app.dart';
 import 'apps/renderer_app.dart';
+import 'units/background/forms/form_paint.dart';
 import 'units/unit.dart';
 
+var currentFrame = 0;
+final frameRate = 50;
+final frameTime = 1000 / frameRate;
+final allTime = 5;
 
+final countHotFrames = 22 * frameRate;
+final allFrames = (allTime * frameRate);
 
-final isDev = true;
+final isDev = false;
+final renderFromSave = true;
 
 
 final pictureSize = Size(600, 600);
 
 void main() async {
-  if(isDev) {
-    final Scene scene = Scene();
+  if (isDev) {
     runApp(RendererApp(
-      scene: scene,
+      scene: () => Scene(),
     ));
   } else {
-    var count = 30;
-    var time = DateTime.now().millisecondsSinceEpoch;
-    for(var i = 0; i < count; i++)  {
-      print('start $i');
-      await recorderApp(Scene());
+    if(renderFromSave) {
+      recorderFromSavedApp();
+    } else {
+      var count = 60;
+      var time = DateTime.now().millisecondsSinceEpoch;
+      for (var i = 0; i < count; i++) {
+        await recorderApp(Scene());
+      }
+      print('All success: ${(DateTime.now().millisecondsSinceEpoch - time) / 1000}sec');
+      print('AVG time: ${(DateTime.now().millisecondsSinceEpoch - time) / count}ms');
     }
-    print('All success: ${(DateTime.now().millisecondsSinceEpoch - time) / 1000}sec');
-    print('AVG time: ${(DateTime.now().millisecondsSinceEpoch - time) / count}ms');
   }
 }
 
 class Scene extends Unit {
   late BackgroundUnit backgroundUnit;
 
-  String name = '_';
+  FormPaint? form;
+  Palette? palette;
+  Generator? generator;
+  MovedUpdater? movedUpdater;
+  RotationUpdater? rotationUpdater;
 
-  var i = 0;
+  Scene({
+    this.form,
+    this.palette,
+    this.generator,
+    this.movedUpdater,
+    this.rotationUpdater,
+  }) {
+    currentFrame = 0;
 
-  Scene() {
-    List<List<Color>> palettes = allPalettes;
+    Palette palette;
+    if (this.palette != null) {
+      palette = this.palette!;
+    } else {
+      palette = Palette();
+    }
 
+    FormPaint form;
     var forms = [
           () => EthForm(),
           () => TriangleForm(),
           () => CircleForm(),
           () => StarForm(),
-      () => SquareForm(),
-      () => HeartForm(),
+          () => SquareForm(),
+          () => HeartForm(),
     ];
+    if (this.form != null) {
+      form = this.form!;
+    } else {
+      form = forms[random.nextInt(forms.length)]();
+    }
 
+    Generator generator;
     var generators = [
           () => CenterGenerator(),
           () => RandomPointsMultiplyGenerator(),
@@ -98,8 +134,13 @@ class Scene extends Unit {
           () => CrossGenerator(),
           () => CenterMovedRotationGenerator(),
     ];
+    if (this.generator != null) {
+      generator = this.generator!;
+    } else {
+      generator = generators[random.nextInt(generators.length)]();
+    }
 
-
+    MovedUpdater movedUpdater;
     var movedUpdaters = [
           () => RandomNotMovedLinearUpdater(),
           () => RandomNotMovedRandomUpdater(),
@@ -108,107 +149,56 @@ class Scene extends Unit {
           () => LineMovedUpdater(),
           () => ChaoticMovedUpdater(),
     ];
+    if (this.movedUpdater != null) {
+      movedUpdater = this.movedUpdater!;
+    } else {
+      movedUpdater = movedUpdaters[random.nextInt(movedUpdaters.length)]();
+    }
 
+    RotationUpdater rotationUpdater;
     var rotationUpdaters = [
-      () => NotRotationUpdater(),
-      () => XRotationUpdater(),
-      () => YRotationUpdater(),
-      () => ZRotationUpdater(),
-      () => XYRotationUpdater(),
-      () => XZRotationUpdater(),
-      () => YZRotationUpdater(),
-      () => XYZRotationUpdater(),
-      () => AXRotationUpdater(),
-      () => AYRotationUpdater(),
-      () => AZRotationUpdater(),
-      () => AXYRotationUpdater(),
-      () => AXZRotationUpdater(),
-      () => AYZRotationUpdater(),
-      () => AXYZRotationUpdater(),
+          () => NotRotationUpdater(),
+          () => XRotationUpdater(),
+          () => YRotationUpdater(),
+          () => ZRotationUpdater(),
+          () => XYRotationUpdater(),
+          () => XZRotationUpdater(),
+          () => YZRotationUpdater(),
+          () => XYZRotationUpdater(),
+          () => AXRotationUpdater(),
+          () => AYRotationUpdater(),
+          () => AZRotationUpdater(),
+          () => AXYRotationUpdater(),
+          () => AXZRotationUpdater(),
+          () => AYZRotationUpdater(),
+          () => AXYZRotationUpdater(),
     ];
-
-    if(isDev) {
-      var count = 0;
-      for(var palette in [palettes.first]) {
-        for(var movedUpdater in movedUpdaters) {
-          for(var form in forms) {
-            for(var generator in generators) {
-              for(var rotationUpdater in rotationUpdaters) {
-                var type = rotationUpdater().runtimeType;
-                if(form().runtimeType == CircleForm().runtimeType
-                    && (type == ZRotationUpdater().runtimeType
-                        || type == XZRotationUpdater().runtimeType
-                        || type == YZRotationUpdater().runtimeType
-                        || type == XYZRotationUpdater().runtimeType)
-                ) {
-                  continue;
-                }
-                var updater = Updater(movedUpdater: movedUpdater(), rotationUpdater: rotationUpdater());
-                count++;
-
-              }
-            }
-          }
-        }
-      }
-      print('ALL COUNTS == ${count}!');
+    if (this.rotationUpdater != null) {
+      rotationUpdater = this.rotationUpdater!;
+    } else {
+      rotationUpdater = rotationUpdaters[random.nextInt(rotationUpdaters.length)]();
     }
 
-    var mU = random.nextInt(movedUpdaters.length);
-    var rU = random.nextInt(rotationUpdaters.length);
-    var aP = random.nextInt(allPalettes.length);
-    var f = random.nextInt(forms.length);
-    var g = random.nextInt(generators.length);
-    name = 'mU${mU}_rU${rU}_ap${aP}_f${f}_g$g';
-
-    var upd = Updater(movedUpdater: movedUpdaters[mU](), rotationUpdater: rotationUpdaters[rU]());
-
-    var count = random.nextInt(3) + 2;
-
-    var p = <Color>[];
-    for(var i = 0; i < count; i++) {
-      p.add(randomRealColor());
-    }
+    print('ALL COUNTS ~~ ${forms.length * generators.length * movedUpdaters.length * rotationUpdaters.length}!');
 
     backgroundUnit = BackgroundUnit(
-      colors: p,//allPalettes[aP],
-      formPaint: forms[f](),
-      updater: upd,
-      generator: generators[g](),
+      colors: palette.colors,
+      formPaint: form,
+      updater: Updater(
+          movedUpdater: movedUpdater,
+          rotationUpdater: rotationUpdater
+      ),
+      generator: generator,
     );
-
-    if(isDev) {
-      Timer.periodic(Duration(seconds: 5), (timer) {
-
-        var mU = random.nextInt(movedUpdaters.length);
-        var rU = random.nextInt(rotationUpdaters.length);
-        var aP = random.nextInt(allPalettes.length);
-        var f = random.nextInt(forms.length);
-        var g = random.nextInt(generators.length);
-        name = 'mU${mU}_rU${rU}_ap${aP}_f${f}_g$g';
-        // print('name $name');
-
-        var p = <Color>[];
-        for(var i = 0; i < count; i++) {
-          p.add(randomRealColor());
-        }
-        var upd = Updater(movedUpdater: movedUpdaters[mU](), rotationUpdater: rotationUpdaters[rU]());
-        backgroundUnit = BackgroundUnit(
-          colors: p,//allPalettes[aP],
-          formPaint: forms[f](),
-          updater: upd,
-          generator: generators[g](),
-        );
-      });
-    }
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.drawPaint(Paint()..color = Colors.black);
-    if(isDev) {
+    canvas.drawPaint(Paint()
+      ..color = Colors.black);
+    if (isDev) {
       canvas.drawRect(
-          Rect.fromCenter(center: Offset(size.width / 2, size.height / 2), width: pictureSize.width-2, height: pictureSize.height-2),
+          Rect.fromCenter(center: Offset(size.width / 2, size.height / 2), width: pictureSize.width - 2, height: pictureSize.height - 2),
           Paint()
             ..color = Colors.white
             ..style = PaintingStyle.stroke);
@@ -239,6 +229,7 @@ class Scene extends Unit {
 
   @override
   void update(double dt) {
+    currentFrame++;
     backgroundUnit.update(dt);
   }
 }

@@ -4,20 +4,22 @@ import 'package:nft_creator/units/background/generates/generator.dart';
 import 'package:nft_creator/utils/utils.dart';
 import 'package:nft_creator/utils/vector2.dart';
 
-class CircleMultiplyGenerator extends Generator {
-  CircleMultiplyGenerator.fromJson(Map json) : super.fromJson(json);
 
-  int? particleCount;
+// создает 2 точки которые крутятся по кругу
+// + версия где они еще притягиваются
+class TwoDanceGenerator extends Generator {
+  TwoDanceGenerator.fromJson(Map json) : super.fromJson(json);
 
-  CircleMultiplyGenerator() {
+  TwoDanceGenerator() {
     init();
   }
 
   @override
   void init() {
-    particleCount = 1 + random.nextInt(5);
+
   }
 
+  int? particleCount = 1 + random.nextInt(5);
   @override
   void update(BackgroundUnit context, double dt) {
     final centerX = context.size!.width / 2;
@@ -25,9 +27,8 @@ class CircleMultiplyGenerator extends Generator {
 
     var radius = (pictureSize.width) / 2;
 
-    var position = Vector2.random() * radius + Vector2(centerX, centerY);
-
     for(var i = 0; i < particleCount!; i++) {
+      var position = Vector2.random() * radius + Vector2(centerX, centerY);
 
       context.particles.add(
         BackgroundParticle(
@@ -37,4 +38,5 @@ class CircleMultiplyGenerator extends Generator {
       );
     }
   }
+
 }

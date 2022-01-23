@@ -3,11 +3,19 @@ import 'package:nft_creator/units/background/updates/rotation/rotation_updater.d
 import 'package:nft_creator/utils/utils.dart';
 
 class XRotationUpdater extends RotationUpdater {
-  bool isRandom = false;
-  double angleX = 0;
-  int angleDirX = 1;
+
+  XRotationUpdater.fromJson(Map json) : super.fromJson(json);
+
+  late bool? isRandom;
+  late double? angleX;
+  late int? angleDirX;
 
   XRotationUpdater() {
+   init();
+  }
+
+  @override
+  void init() {
     isRandom = random.nextBool();
     angleX = (30.0 + random.nextInt(150));
     angleDirX = random.sign();
@@ -15,10 +23,10 @@ class XRotationUpdater extends RotationUpdater {
 
   void update(BackgroundUnit context, double dt) {
     context.particles.toList().forEach((p) {
-      if(isRandom) {
-        p.rotationX += random.nextInt(angleX.toInt()) * angleDirX * dt;
+      if(isRandom!) {
+        p.rotationX += random.nextInt(angleX!.toInt()) * angleDirX! * dt;
       } else {
-        p.rotationX += angleX * angleDirX * dt;
+        p.rotationX += angleX! * angleDirX! * dt;
       }
     });
   }

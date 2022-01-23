@@ -3,10 +3,10 @@ import 'package:nft_creator/units/background/updates/moved/moved_updater.dart';
 import 'package:nft_creator/utils/utils.dart';
 import 'package:nft_creator/utils/vector2.dart';
 
-class ChaoticMovedUpdater extends MovedUpdater {
+class RandomNotMovedRandomUpdater extends MovedUpdater {
 
-  ChaoticMovedUpdater.fromJson(Map json) : super.fromJson(json);
-  ChaoticMovedUpdater() {
+  RandomNotMovedRandomUpdater.fromJson(Map json) : super.fromJson(json);
+  RandomNotMovedRandomUpdater() {
     init();
   }
 
@@ -15,11 +15,14 @@ class ChaoticMovedUpdater extends MovedUpdater {
     // TODO: implement init
   }
 
-  @override
+  Map<BackgroundParticle, Vector2> particles = {};
+
   void update(BackgroundUnit context, double dt) {
     context.particles.forEach((p) {
-      p.velocity += Vector2.random();
-      p.speed += 100 * dt;
+      if(particles[p] == null) {
+        particles[p] = random.nextBool() ? Vector2.zero() :  Vector2.random() * 1;
+      }
+      p.velocity = particles[p]!;
     });
   }
 }
