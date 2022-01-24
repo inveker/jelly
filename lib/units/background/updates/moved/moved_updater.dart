@@ -22,7 +22,7 @@ abstract class MovedUpdater {
     return {
       'runtype': this.runtimeType.toString(),
       'speed': speed,
-      'tails': tails?.map((e) => e.toJson()).toList().cast<Vector2>(),
+      'tails': tails?.map((e) => e.toJson()).toList(),
       'angleZ': angleZ,
     };
   }

@@ -16,8 +16,6 @@ class RotationMovedUpdater extends MovedUpdater {
     angleZ = 30 + random.nextInt(150) * random.sign();
   }
 
-  num? speed;
-  num? angleZ;
 
   @override
   void update(BackgroundUnit context, double dt) {

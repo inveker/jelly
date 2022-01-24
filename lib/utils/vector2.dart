@@ -22,6 +22,10 @@ class Vector2 {
     x = 0,
     y = 0;
 
+  Vector2 copy() {
+    return Vector2(x, y);
+  }
+
   factory Vector2.random() {
     double x = random.nextBool() ? 1 : -1;
     x *= random.nextInt(100) + 1;

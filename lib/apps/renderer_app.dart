@@ -55,6 +55,7 @@ class _RendererAppState extends State<RendererApp> {
       generator: scene.backgroundUnit.generator,
       movedUpdater: scene.backgroundUnit.updater.movedUpdater,
       rotationUpdater: scene.backgroundUnit.updater.rotationUpdater,
+      widthSpeed: scene.widthSpeed,
     );
     setState(() {});
   }
@@ -63,9 +64,10 @@ class _RendererAppState extends State<RendererApp> {
     scene = Scene(
       form: currentNft.form,
       palette: currentNft.palette,
-      generator: currentNft.generator,
+      generator: currentNft.generator?..reset(),
       movedUpdater: currentNft.movedUpdater,
       rotationUpdater: currentNft.rotationUpdater,
+      widthSpeed: currentNft.widthSpeed,
     );
     setState(() {});
   }
@@ -78,6 +80,7 @@ class _RendererAppState extends State<RendererApp> {
       generator: currentNft.generator,
       movedUpdater: currentNft.movedUpdater,
       rotationUpdater: currentNft.rotationUpdater,
+      widthSpeed: currentNft.widthSpeed,
     );
     setState(() {});
   }
@@ -91,16 +94,6 @@ class _RendererAppState extends State<RendererApp> {
     setState(() {});
   }
 
-  void saveStart() {
-    currentNft.startFrame = 0;
-    currentNft.save();
-  }
-
-  void saveHot() {
-    currentNft.startFrame = currentFrame;
-    currentNft.save();
-  }
-
   bool withVideo = false;
   void addVideo() {
     if(currentNft.hasVideo != null && currentNft.hasVideo!) {
@@ -109,6 +102,29 @@ class _RendererAppState extends State<RendererApp> {
       currentNft.hasVideo = true;
     }
     withVideo = currentNft.hasVideo!;
+    setState(() {});
+  }
+
+  void saveNft() {
+    currentNft.hasVideo = withVideo;
+    currentNft.reversed = reverse == 0 ? random.nextBool() : (reverse == 1 ? false : true);
+    currentNft.startFrame = isHot ? startFrame : 0;
+    currentNft.save();
+  }
+
+  void rebuild() {
+    currentNft.form!.init();
+    currentNft.generator!.init();
+    currentNft.movedUpdater!.init();
+    currentNft.rotationUpdater!.init();
+    scene = Scene(
+      form: currentNft.form,
+      palette: currentNft.palette,
+      generator: currentNft.generator,
+      movedUpdater: currentNft.movedUpdater,
+      rotationUpdater: currentNft.rotationUpdater,
+      widthSpeed: currentNft.widthSpeed,
+    );
     setState(() {});
   }
 
@@ -121,113 +137,167 @@ class _RendererAppState extends State<RendererApp> {
 
   bool showMenu = false;
   FocusNode focusNode = FocusNode()..requestFocus();
+  bool isHot = true;
+  int startFrame = currentFrame;
+
+  int reverse = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: RawKeyboardListener(
-        onKey: (e) {
-          if (e.isKeyPressed(LogicalKeyboardKey.enter)) {
-            setState(() {
-              showMenu = !showMenu;
-            });
-          }
-        },
-        focusNode: focusNode,
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: CustomPaint(
-                painter: MyCustomPainter(
-                  repaint: notifier,
-                  scene: scene,
+      home: Builder(
+        builder: (context) {
+          return RawKeyboardListener(
+            onKey: (e) {
+              if (e.isKeyPressed(LogicalKeyboardKey.enter)) {
+                setState(() {
+                  showMenu = !showMenu;
+                });
+              }
+            },
+            focusNode: focusNode,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: CustomPaint(
+                    painter: MyCustomPainter(
+                      repaint: notifier,
+                      scene: scene,
+                    ),
+                  ),
                 ),
-              ),
+                if (showMenu)
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    width: pictureSize.width,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 8,
+                        top: 8,
+                        bottom: 8,
+                        right: 32,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 150,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                ElevatedButton(
+                                  child: Text('Rebuild'),
+                                  onPressed: () {
+                                    rebuild();
+                                  },
+                                ),
+                                const SizedBox(height: 16,),
+                                ElevatedButton(
+                                  child: Text('Restart'),
+                                  onPressed: () {
+                                    restartScene();
+                                  },
+                                ),
+                                const SizedBox(height: 16,),
+                                ElevatedButton(
+                                  child: Text('Change color'),
+                                  onPressed: () {
+                                    changeColor();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          ElevatedButton(
+                            child: Text(ticker.isActive ? 'Stop' : 'Start'),
+                            onPressed: () {
+                              toggleTick();
+                            },
+                          ),
+                          Container(
+                            width: 150,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                ElevatedButton(
+                                  child: Text('Save'),
+                                  onPressed: () {
+                                    setState(() {
+                                      startFrame = currentFrame;
+                                    });
+                                    showDialog(context: context, builder: (context) {
+                                      return Center(
+                                        child: Container(
+                                          width: 300,
+                                          height: 300,
+                                          color: Colors.white,
+                                          padding: const EdgeInsets.all(20),
+                                          child: Column(
+                                            children: [
+                                              OutlinedButton(
+                                                child: Text(reverse == 0 ? 'Random reverse' : (reverse == 1 ? 'Not reverse' : 'Reverse')),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    reverse++;
+                                                    if(reverse > 2) {
+                                                      reverse = 0;
+                                                    }
+                                                  });
+                                                },
+                                              ),
+                                              const SizedBox(height: 16,),
+                                              OutlinedButton(
+                                                child: Text(isHot ? 'Hot' : 'Cold'),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    isHot = !isHot;
+                                                  });
+                                                },
+                                              ),
+                                              const SizedBox(height: 16,),
+                                              OutlinedButton(
+                                                child: Text(withVideo ? 'Has video' : 'Not video'),
+                                                onPressed: () {
+                                                  setState(() {
+                                                    withVideo = !withVideo;
+                                                  });
+                                                },
+                                              ),
+                                              const SizedBox(height: 16,),
+                                              ElevatedButton(
+                                                child: Text('Save'),
+                                                onPressed: () {
+                                                  saveNft();
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    });
+                                  },
+                                ),
+                                const SizedBox(height: 16,),
+                                ElevatedButton(
+                                  child: Text('Next'),
+                                  onPressed: () {
+                                    newScene();
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+              ],
             ),
-            if (showMenu)
-              Positioned(
-                bottom: 0,
-                left: 0,
-                width: pictureSize.width,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    left: 8,
-                    top: 8,
-                    bottom: 8,
-                    right: 32,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        width: 150,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            ElevatedButton(
-                              child: Text('Restart'),
-                              onPressed: () {
-                                restartScene();
-                              },
-                            ),
-                            const SizedBox(height: 16,),
-                            ElevatedButton(
-                              child: Text(withVideo ? 'Delete video' : 'Add video'),
-                              onPressed: () {
-                                addVideo();
-                              },
-                            ),
-                            const SizedBox(height: 16,),
-                            ElevatedButton(
-                              child: Text('Change color'),
-                              onPressed: () {
-                                changeColor();
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      ElevatedButton(
-                        child: Text(ticker.isActive ? 'Stop' : 'Start'),
-                        onPressed: () {
-                          toggleTick();
-                        },
-                      ),
-                      Container(
-                        width: 150,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            ElevatedButton(
-                              child: Text('Save start'),
-                              onPressed: () {
-                                saveStart();
-                              },
-                            ),
-                            const SizedBox(height: 16,),
-                            ElevatedButton(
-                              child: Text('Save hot'),
-                              onPressed: () {
-                                saveHot();
-                              },
-                            ),
-                            const SizedBox(height: 16,),
-                            ElevatedButton(
-                              child: Text('Next'),
-                              onPressed: () {
-                                newScene();
-                              },
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-          ],
-        ),
+          );
+        }
       ),
     );
   }

@@ -7,12 +7,7 @@ import 'package:nft_creator/utils/vector2.dart';
 class RandomPointsMultiplyGenerator extends Generator {
   RandomPointsMultiplyGenerator.fromJson(Map json) : super.fromJson(json);
 
-  double? length;
-  double? angleZ;
 
-  int? particleCount;
-
-  late List<Vector2>? points;
 
   RandomPointsMultiplyGenerator() {
     init();
@@ -31,13 +26,6 @@ class RandomPointsMultiplyGenerator extends Generator {
 
   @override
   void update(BackgroundUnit context, double dt) {
-    final centerX = context.size!.width / 2;
-    final centerY = context.size!.height / 2;
-
-    var radius = (pictureSize.width) / 2;
-
-    var v = Vector2(1, 0).rotate(radians(angleZ!)) * length!;
-
     var p = random.nextInt(points!.length);
     for(var i = 0; i < particleCount!; i++) {
       context.particles.add(

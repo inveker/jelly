@@ -31,12 +31,6 @@ class RandomPointsGenerator extends Generator {
 
   @override
   void update(BackgroundUnit context, double dt) {
-    final centerX = context.size!.width / 2;
-    final centerY = context.size!.height / 2;
-
-    var radius = (pictureSize.width) / 2;
-
-    var v = Vector2(1, 0).rotate(radians(angleZ!)) * length!;
 
     for(var point in points!) {
       context.particles.add(

@@ -15,7 +15,6 @@ class LineMovedUpdater extends MovedUpdater {
     speed = 100 + random.nextInt(100);
   }
 
-  num? speed;
 
   @override
   void update(BackgroundUnit context, double dt) {

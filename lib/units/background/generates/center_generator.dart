@@ -23,8 +23,6 @@ class CenterGenerator extends Generator {
     final centerX = context.size!.width / 2;
     final centerY = context.size!.height / 2;
 
-
-
     for(var i = 0; i < particleCount!; i++) {
       var position = Vector2(centerX, centerY);
 

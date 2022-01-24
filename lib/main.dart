@@ -58,19 +58,24 @@ final allTime = 5;
 final countHotFrames = 22 * frameRate;
 final allFrames = (allTime * frameRate);
 
-final isDev = false;
-final renderFromSave = true;
+enum AppMode {
+  preview,
+  recorder,
+  recorderFromSave
+}
+
+AppMode appMode = AppMode.preview;
 
 
 final pictureSize = Size(600, 600);
 
 void main() async {
-  if (isDev) {
+  if (appMode == AppMode.preview) {
     runApp(RendererApp(
       scene: () => Scene(),
     ));
   } else {
-    if(renderFromSave) {
+    if(appMode == AppMode.recorderFromSave) {
       recorderFromSavedApp();
     } else {
       var count = 60;
@@ -92,6 +97,7 @@ class Scene extends Unit {
   Generator? generator;
   MovedUpdater? movedUpdater;
   RotationUpdater? rotationUpdater;
+  double? widthSpeed;
 
   Scene({
     this.form,
@@ -99,6 +105,7 @@ class Scene extends Unit {
     this.generator,
     this.movedUpdater,
     this.rotationUpdater,
+    this.widthSpeed,
   }) {
     currentFrame = 0;
 
@@ -185,8 +192,9 @@ class Scene extends Unit {
       colors: palette.colors,
       formPaint: form,
       updater: Updater(
-          movedUpdater: movedUpdater,
-          rotationUpdater: rotationUpdater
+        movedUpdater: movedUpdater,
+        rotationUpdater: rotationUpdater,
+        widthSpeed: widthSpeed,
       ),
       generator: generator,
     );
@@ -196,7 +204,7 @@ class Scene extends Unit {
   void paint(Canvas canvas, Size size) {
     canvas.drawPaint(Paint()
       ..color = Colors.black);
-    if (isDev) {
+    if (appMode == AppMode.preview) {
       canvas.drawRect(
           Rect.fromCenter(center: Offset(size.width / 2, size.height / 2), width: pictureSize.width - 2, height: pictureSize.height - 2),
           Paint()

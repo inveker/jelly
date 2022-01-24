@@ -7,13 +7,14 @@ class Updater {
 
   final MovedUpdater movedUpdater;
   final RotationUpdater rotationUpdater;
-  var widthSpeed = 1;
+  late double widthSpeed;
 
   Updater({
     required this.movedUpdater,
     required this.rotationUpdater,
+    double? widthSpeed,
   }) {
-    widthSpeed = random.nextInt(3) + 3;
+    this.widthSpeed = widthSpeed ?? random.nextInt(3) + 3;
   }
 
 

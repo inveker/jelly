@@ -12,6 +12,7 @@ abstract class Generator {
   double? angleZ;
   List<Vector2>? points;
   void update(BackgroundUnit context, double dt);
+  void reset() {}
 
 
   Generator();
@@ -42,7 +43,7 @@ abstract class Generator {
       'angleDir': angleDir,
       'length': length,
       'angleZ': angleZ,
-      'points': points?.map((e) => e.toJson()).toList().cast<Vector2>(),
+      'points': points?.map((e) => e.toJson()).toList(),
     };
   }
 }

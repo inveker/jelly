@@ -1,74 +1,151 @@
 [
   {
     "form": {
-      "runtype": "TriangleForm",
-      "selfRotationZ": 73.0,
-      "randomSelfRotation": true
+      "runtype": "CircleForm",
+      "selfRotationZ": null,
+      "randomSelfRotation": null
     },
     "palette": [
       [
         255,
-        108,
-        50,
-        172
-      ],
-      [
-        255,
-        191,
-        14,
-        246
+        79,
+        29,
+        130
       ],
       [
         255,
         68,
-        30,
-        36
+        159,
+        135
       ],
       [
         255,
-        78,
-        15,
-        54
-      ],
-      [
-        255,
-        18,
-        214,
-        208
+        119,
+        130,
+        97
       ]
     ],
     "generator": {
-      "runtype": "RandomPointsGenerator",
-      "particleCount": 5,
+      "runtype": "CircleMultiplyGenerator",
+      "particleCount": 4,
       "position": null,
       "velocity": null,
       "ang": null,
       "speed": null,
       "angleDir": null,
-      "length": 281.0,
-      "angleZ": 106.0,
-      "points": [
-        {
-          "x": 71.0,
-          "y": 583.0
-        },
-        {
-          "x": 223.0,
-          "y": 599.0
-        },
-        {
-          "x": 71.0,
-          "y": 196.0
-        },
-        {
-          "x": 305.0,
-          "y": 454.0
-        },
-        {
-          "x": 198.0,
-          "y": 218.0
-        }
+      "length": null,
+      "angleZ": null,
+      "points": null
+    },
+    "movedUpdater": {
+      "runtype": "ChaoticMovedUpdater",
+      "speed": null,
+      "tails": null,
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "AXYRotationUpdater",
+      "isRandom": true,
+      "angleX": null,
+      "angleDirX": null,
+      "angleY": null,
+      "angleDirY": null,
+      "angleZ": null,
+      "angleDirZ": null
+    },
+    "reversed": null,
+    "startFrame": 0,
+    "hasVideo": null
+  },
+  {
+    "form": {
+      "runtype": "TriangleForm",
+      "selfRotationZ": 303.0,
+      "randomSelfRotation": true
+    },
+    "palette": [
+      [
+        255,
+        144,
+        209,
+        102
+      ],
+      [
+        255,
+        65,
+        87,
+        20
       ]
+    ],
+    "generator": {
+      "runtype": "CircleMultiplyGenerator",
+      "particleCount": 4,
+      "position": null,
+      "velocity": null,
+      "ang": null,
+      "speed": null,
+      "angleDir": null,
+      "length": null,
+      "angleZ": null,
+      "points": null
+    },
+    "movedUpdater": {
+      "runtype": "ChaoticMovedUpdater",
+      "speed": null,
+      "tails": null,
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "AXRotationUpdater",
+      "isRandom": true,
+      "angleX": null,
+      "angleDirX": null,
+      "angleY": null,
+      "angleDirY": null,
+      "angleZ": null,
+      "angleDirZ": null
+    },
+    "reversed": null,
+    "startFrame": 0,
+    "hasVideo": null
+  },
+  {
+    "form": {
+      "runtype": "HeartForm",
+      "selfRotationZ": -33.0,
+      "randomSelfRotation": true
+    },
+    "palette": [
+      [
+        255,
+        49,
+        73,
+        92
+      ],
+      [
+        255,
+        62,
+        40,
+        115
+      ],
+      [
+        255,
+        97,
+        95,
+        110
+      ]
+    ],
+    "generator": {
+      "runtype": "CrossGenerator",
+      "particleCount": 3,
+      "position": null,
+      "velocity": null,
+      "ang": null,
+      "speed": null,
+      "angleDir": null,
+      "length": 192.0,
+      "angleZ": 81.0,
+      "points": null
     },
     "movedUpdater": {
       "runtype": "NotMovedUpdater",
@@ -77,17 +154,364 @@
       "angleZ": null
     },
     "rotationUpdater": {
-      "runtype": "XYRotationUpdater",
-      "isRandom": false,
-      "angleX": 53.0,
-      "angleDirX": -1,
-      "angleY": 178.0,
-      "angleDirY": -1,
+      "runtype": "XRotationUpdater",
+      "isRandom": true,
+      "angleX": 72.0,
+      "angleDirX": 1,
+      "angleY": null,
+      "angleDirY": null,
       "angleZ": null,
       "angleDirZ": null
     },
     "reversed": null,
-    "startFrame": 150
+    "startFrame": 0,
+    "hasVideo": null
+  },
+  {
+    "form": {
+      "runtype": "HeartForm",
+      "selfRotationZ": -59.0,
+      "randomSelfRotation": true
+    },
+    "palette": [
+      [
+        255,
+        174,
+        10,
+        254
+      ],
+      [
+        255,
+        99,
+        234,
+        20
+      ],
+      [
+        255,
+        49,
+        234,
+        226
+      ]
+    ],
+    "generator": {
+      "runtype": "RandomPointsGenerator",
+      "particleCount": 1,
+      "position": null,
+      "velocity": null,
+      "ang": null,
+      "speed": null,
+      "angleDir": null,
+      "length": 276.0,
+      "angleZ": 49.0,
+      "points": [
+        {
+          "x": 467.0,
+          "y": 331.0
+        }
+      ]
+    },
+    "movedUpdater": {
+      "runtype": "ChaoticMovedUpdater",
+      "speed": null,
+      "tails": null,
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "XZRotationUpdater",
+      "isRandom": false,
+      "angleX": 94.0,
+      "angleDirX": -1,
+      "angleY": null,
+      "angleDirY": null,
+      "angleZ": 106.0,
+      "angleDirZ": 1
+    },
+    "reversed": true,
+    "startFrame": 114,
+    "hasVideo": false
+  },
+  {
+    "form": {
+      "runtype": "StarForm",
+      "selfRotationZ": 22.0,
+      "randomSelfRotation": true
+    },
+    "palette": [
+      [
+        255,
+        96,
+        42,
+        240
+      ],
+      [
+        255,
+        10,
+        61,
+        43
+      ],
+      [
+        255,
+        77,
+        55,
+        108
+      ],
+      [
+        255,
+        251,
+        86,
+        0
+      ],
+      [
+        255,
+        111,
+        40,
+        246
+      ]
+    ],
+    "generator": {
+      "runtype": "CrossGenerator",
+      "particleCount": 3,
+      "position": null,
+      "velocity": null,
+      "ang": null,
+      "speed": null,
+      "angleDir": null,
+      "length": 128.0,
+      "angleZ": 245.0,
+      "points": null
+    },
+    "movedUpdater": {
+      "runtype": "LineMovedUpdater",
+      "speed": 166,
+      "tails": null,
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "XZRotationUpdater",
+      "isRandom": false,
+      "angleX": 96.0,
+      "angleDirX": 1,
+      "angleY": null,
+      "angleDirY": null,
+      "angleZ": 54.0,
+      "angleDirZ": 1
+    },
+    "reversed": true,
+    "startFrame": 0,
+    "hasVideo": false
+  },
+  {
+    "form": {
+      "runtype": "EthForm",
+      "selfRotationZ": -36.0,
+      "randomSelfRotation": false
+    },
+    "palette": [
+      [
+        255,
+        72,
+        254,
+        172
+      ],
+      [
+        255,
+        204,
+        58,
+        7
+      ],
+      [
+        255,
+        236,
+        4,
+        77
+      ]
+    ],
+    "generator": {
+      "runtype": "RandomPointsMultiplyGenerator",
+      "particleCount": 3,
+      "position": null,
+      "velocity": null,
+      "ang": null,
+      "speed": null,
+      "angleDir": null,
+      "length": 205.0,
+      "angleZ": 108.0,
+      "points": [
+        {
+          "x": 222.0,
+          "y": 456.0
+        },
+        {
+          "x": 149.0,
+          "y": 598.0
+        },
+        {
+          "x": 371.0,
+          "y": 22.0
+        }
+      ]
+    },
+    "movedUpdater": {
+      "runtype": "RandomNotMovedRandomUpdater",
+      "speed": null,
+      "tails": null,
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "AXYZRotationUpdater",
+      "isRandom": true,
+      "angleX": null,
+      "angleDirX": null,
+      "angleY": null,
+      "angleDirY": null,
+      "angleZ": null,
+      "angleDirZ": null
+    },
+    "reversed": false,
+    "startFrame": 145,
+    "hasVideo": false,
+    "widthSpeed": null
+  },
+  {
+    "form": {
+      "runtype": "TriangleForm",
+      "selfRotationZ": 283.0,
+      "randomSelfRotation": true
+    },
+    "palette": [
+      [
+        255,
+        97,
+        159,
+        38
+      ],
+      [
+        255,
+        221,
+        195,
+        37
+      ]
+    ],
+    "generator": {
+      "runtype": "CenterGenerator",
+      "particleCount": 3,
+      "position": null,
+      "velocity": null,
+      "ang": null,
+      "speed": null,
+      "angleDir": null,
+      "length": null,
+      "angleZ": null,
+      "points": null
+    },
+    "movedUpdater": {
+      "runtype": "RandomNotMovedLinearUpdater",
+      "speed": null,
+      "tails": [
+        {
+          "x": 2.9159944081696896,
+          "y": -0.7049656810959688
+        },
+        {
+          "x": -1.829132282549077,
+          "y": 2.3778719673138005
+        },
+        {
+          "x": -0.727606875108999,
+          "y": 2.910427500435996
+        },
+        {
+          "x": 1.7938873224028038,
+          "y": -2.4045723683271625
+        }
+      ],
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "AXYRotationUpdater",
+      "isRandom": false,
+      "angleX": null,
+      "angleDirX": null,
+      "angleY": null,
+      "angleDirY": null,
+      "angleZ": null,
+      "angleDirZ": null
+    },
+    "reversed": false,
+    "startFrame": 123,
+    "hasVideo": false,
+    "widthSpeed": null
+  },
+  {
+    "form": {
+      "runtype": "SquareForm",
+      "selfRotationZ": 337.0,
+      "randomSelfRotation": false
+    },
+    "palette": [
+      [
+        255,
+        172,
+        232,
+        68
+      ],
+      [
+        255,
+        30,
+        222,
+        178
+      ],
+      [
+        255,
+        237,
+        11,
+        47
+      ],
+      [
+        255,
+        174,
+        110,
+        81
+      ],
+      [
+        255,
+        60,
+        214,
+        128
+      ]
+    ],
+    "generator": {
+      "runtype": "CircleMultiplyGenerator",
+      "particleCount": 5,
+      "position": null,
+      "velocity": null,
+      "ang": null,
+      "speed": null,
+      "angleDir": null,
+      "length": null,
+      "angleZ": null,
+      "points": null
+    },
+    "movedUpdater": {
+      "runtype": "RandomNotMovedRandomUpdater",
+      "speed": null,
+      "tails": null,
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "YZRotationUpdater",
+      "isRandom": true,
+      "angleX": null,
+      "angleDirX": null,
+      "angleY": 65.0,
+      "angleDirY": 1,
+      "angleZ": 168.0,
+      "angleDirZ": 1
+    },
+    "reversed": false,
+    "startFrame": 149,
+    "hasVideo": false,
+    "widthSpeed": null
   },
   {
     "form": {
@@ -98,37 +522,43 @@
     "palette": [
       [
         255,
-        206,
-        80,
+        118,
+        59,
         98
       ],
       [
         255,
-        80,
-        45,
-        188
+        135,
+        249,
+        113
       ],
       [
         255,
-        76,
-        223,
-        192
+        124,
+        249,
+        160
+      ],
+      [
+        255,
+        83,
+        89,
+        157
       ]
     ],
     "generator": {
       "runtype": "CenterMovedRotationGenerator",
-      "particleCount": 3,
+      "particleCount": 4,
       "position": {
-        "x": 522.4661405178373,
-        "y": 151.2352025313269
+        "x": 457.0,
+        "y": 358.0
       },
       "velocity": {
-        "x": 0.6570530046495582,
-        "y": 0.7538443798828689
+        "x": -0.30908607233755814,
+        "y": 0.9510340687309481
       },
-      "ang": 160.0,
-      "speed": 1561.0,
-      "angleDir": -1,
+      "ang": 333.0,
+      "speed": 330.0,
+      "angleDir": 1,
       "length": null,
       "angleZ": null,
       "points": null
@@ -138,31 +568,101 @@
       "speed": null,
       "tails": [
         {
-          "x": -1.7013051989950603,
-          "y": -2.4709432652071115
+          "x": 2.2268041237113403,
+          "y": 2.0103092783505154
         },
         {
-          "x": -1.6759961694149714,
-          "y": -1.091346342874865
-        },
-        {
-          "x": 1.0541901274481145,
-          "y": 1.6996126544571641
+          "x": 1.8647247998000518,
+          "y": 2.3500641312548596
         }
       ],
       "angleZ": null
     },
     "rotationUpdater": {
-      "runtype": "XYRotationUpdater",
-      "isRandom": true,
-      "angleX": 107.0,
-      "angleDirX": -1,
-      "angleY": 159.0,
-      "angleDirY": 1,
+      "runtype": "AXYRotationUpdater",
+      "isRandom": false,
+      "angleX": null,
+      "angleDirX": null,
+      "angleY": null,
+      "angleDirY": null,
       "angleZ": null,
       "angleDirZ": null
     },
-    "reversed": null,
-    "startFrame": 0
+    "reversed": false,
+    "startFrame": 160,
+    "hasVideo": false,
+    "widthSpeed": null
+  },
+  {
+    "form": {
+      "runtype": "SquareForm",
+      "selfRotationZ": 245.0,
+      "randomSelfRotation": false
+    },
+    "palette": [
+      [
+        255,
+        14,
+        154,
+        254
+      ],
+      [
+        255,
+        66,
+        74,
+        95
+      ],
+      [
+        255,
+        168,
+        186,
+        82
+      ]
+    ],
+    "generator": {
+      "runtype": "RandomPointsGenerator",
+      "particleCount": 3,
+      "position": null,
+      "velocity": null,
+      "ang": null,
+      "speed": null,
+      "angleDir": null,
+      "length": 206.0,
+      "angleZ": 13.0,
+      "points": [
+        {
+          "x": 227.0,
+          "y": 105.0
+        },
+        {
+          "x": 31.0,
+          "y": 426.0
+        },
+        {
+          "x": 419.0,
+          "y": 391.0
+        }
+      ]
+    },
+    "movedUpdater": {
+      "runtype": "RandomNotMovedRandomUpdater",
+      "speed": null,
+      "tails": null,
+      "angleZ": null
+    },
+    "rotationUpdater": {
+      "runtype": "AXRotationUpdater",
+      "isRandom": true,
+      "angleX": null,
+      "angleDirX": null,
+      "angleY": null,
+      "angleDirY": null,
+      "angleZ": null,
+      "angleDirZ": null
+    },
+    "reversed": false,
+    "startFrame": 162,
+    "hasVideo": false,
+    "widthSpeed": null
   }
 ]

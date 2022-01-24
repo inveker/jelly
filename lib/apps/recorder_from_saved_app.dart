@@ -10,9 +10,6 @@ import 'package:nft_creator/utils/utils.dart';
 Future<void> recorderFromSavedApp() async {
   var time = DateTime.now().millisecondsSinceEpoch;
 
-  String nftName = random.nextInt(100).toString();
-  print('RecordedApp $nftName');
-
   var file = File(r'C:\Users\User\AndroidStudioProjects\nft_creator_jelly\lib\saved.json');
   List<CurrentNft> savedData = jsonDecode(file.readAsStringSync()).map((e) => CurrentNft.fromJson(e)).toList().cast<CurrentNft>();
 
@@ -21,6 +18,8 @@ Future<void> recorderFromSavedApp() async {
 
   for(var savedNft in savedData) {
     var localTime = DateTime.now().millisecondsSinceEpoch;
+    String nftName = random.nextInt(100).toString();
+    print('RecordedApp $nftName');
 
     var dirPath = 'C:/Users/User/AndroidStudioProjects/nft_creator_jelly/lib/images/${nftName}';
     var q = 1;
@@ -40,7 +39,7 @@ Future<void> recorderFromSavedApp() async {
 
     var countHotFrames = savedNft.startFrame!;
 
-    for(var i = 0; i < allFrames; i++) {
+    for(var i = 0; i < allFrames + countHotFrames; i++) {
       await Future.delayed(Duration(milliseconds: frameTime.toInt()), () async {
         final recorder = PictureRecorder();
         final canvas = Canvas(recorder, new Rect.fromLTWH(0.0, 0.0, imageWidth, imageHeight));

@@ -28,8 +28,6 @@ class CrossGenerator extends Generator {
     final centerX = context.size!.width / 2;
     final centerY = context.size!.height / 2;
 
-    var radius = (pictureSize.width) / 2;
-
     var v = Vector2(1, 0).rotate(radians(angleZ!)) * length!;
 
     for(var i = 0; i < particleCount!; i++) {

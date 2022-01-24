@@ -55,6 +55,7 @@ class CurrentNft {
   bool? reversed = random.nextBool();
   int? startFrame = 0;
   bool? hasVideo = false;
+  double? widthSpeed;
 
   CurrentNft({
     this.form,
@@ -65,6 +66,7 @@ class CurrentNft {
     this.reversed,
     this.startFrame,
     this.hasVideo,
+    this.widthSpeed,
   });
 
   Map toJson() {
@@ -77,6 +79,7 @@ class CurrentNft {
       'reversed': reversed,
       'startFrame': startFrame,
       'hasVideo': hasVideo,
+      'widthSpeed': widthSpeed,
     };
   }
 
@@ -179,6 +182,7 @@ class CurrentNft {
       reversed: json['reversed'],
       startFrame: json['startFrame'],
       hasVideo: json['hasVideo'],
+      widthSpeed: json['widthSpeed'],
     );
   }
 }
